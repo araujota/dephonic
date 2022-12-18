@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DePhonic | Add a Track</title>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <!-- Container Wrapper -->
+        <div class="container">
+            <!-- Company logo -->
+            <a class="navbar_logo" href="">
+                <img src="" />
+            </a>
+            <!-- Page tile -->
+            <span>Add Track</span>
+            <!-- Logout button -->
+            <button type="button" class="navbar_logout">Logout</button>
+        </div>
+        <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+    <!-- Add track -->
+    <div class="form_add_track">
+        <form action="" method="post" class="">
+            <!-- Add audio file -->
+            <div class="audio_file">
+        
+            </div>
+            <!-- Add audio title -->
+            <div class="title">
+                {% with messages = get_flashed_messages(category_filter=["track_title"]) %}
+                {% if messages %}
+                {% for message in messages %}
+                <p>{{message}}</p>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+                <label for="title"></label>
+                <input type="text" name="title" placeholder="Add Title" class="form_control">
+            </div>
+            <!-- Submit form -->
+            <input type="submit" value="Save" class="form_submit">
+        </form>
+    </div>
+    <!-- Add track -->
+</body>
+
+<!-- Footer -->
+<footer>
+    <ul>
+        <li>About Us</li>
+        <li>Contact Us</li>
+        <li>Q & A</li>
+    </ul>
+</footer>
+
+</html>
