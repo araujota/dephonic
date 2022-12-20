@@ -7,7 +7,7 @@ bcrypt = Bcrypt(app)
 
 @app.route('/')
 def index():
-    return "DePhonic"
+    return render_template("homepage.html")
 
 @app.route('/tracks')
 def user_tracks():
