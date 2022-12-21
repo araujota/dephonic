@@ -17,6 +17,7 @@ class User:
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.tracks =[]
+        
     @classmethod
     def reg_user(cls, data):
         query = "INSERT INTO users(first_name, last_name, email, password) VALUES(%(first_name)s, %(last_name)s, %(email)s, %(password)s)"
@@ -71,20 +72,23 @@ class User:
     @staticmethod
     def val_update(user):
         is_valid = True
-        the_user_filtered_by_id = User.user_by_id(user)
-        print(the_user_filtered_by_id)
+        #the_user_filtered_by_id = User.user_by_id(user)
+        #print(the_user_filtered_by_id)
         user_db = User.user_by_email(user)
-        if the_user_filtered_by_id.email != user['email']:
-            print("Not same email.")
-            if user_db:
-                print("Email exists in database")
-                flash("Can not change email.")
-                is_valid = False
+        #if the_user_filtered_by_id.email != user['email']:
+        #    print("Not same email.")
+        if user_db:
+            print("Email exists in database")
+            flash("Can not change email.")
+            is_valid = False
         if len(user['first_name']) <3:
             flash ('First name must be at least 3 characters.')
             is_valid = False
         if len(user['last_name']) <3:
             flash ('Last name must be at least 3 characters.')
+            is_valid = False
+        if len(user['password']) <8:
+            flash ('Password must be at least 8 characters.')
             is_valid = False
         if not EMAIL_REGEX.match(user['email']):
             flash('Invalid email.')
@@ -106,6 +110,11 @@ class User:
             flash ('Password must be at least 8 characters.')
             is_valid = False
         return is_valid
+    
+    @classmethod
+    def update_user(cls, data):
+        query ="UPDATE users SET firstName = %(firstName)s, lastName = %(lastName)s, email = %(email)s, password = %(password)s WHERE id=%(id)s"
+        return connectToMySQL(cls.db).query_db(query, data)
     
     @classmethod
     def show(cls, data):
