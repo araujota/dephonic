@@ -9,6 +9,18 @@ bcrypt = Bcrypt(app)
 def index():
     return render_template("homepage.html")
 
+@app.route('/loginOrReg')
+def login_reg():
+    return render_template("login_reg.html")
+
+#working on update stuff here
+#@app.route('/editAcc')
+#def editAcc(id):
+    
+#@app.route('/updateAcc', methods=["POST"])
+#def updateAcc(id):
+    
+
 @app.route('/tracks')
 def user_tracks():
     user_data = {

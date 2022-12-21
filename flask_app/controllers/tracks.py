@@ -6,6 +6,15 @@ from flask import flash
 import os
 from werkzeug.utils import secure_filename
 
+@app.route('/show-tracks')
+def all():
+    if "user_id" not in session:
+        return redirect('/logout')
+    user = User.user_by_id(session["user_id"])
+    print(session['user_id'])
+    return render_template("showtracks.html", user=user, all_tracks = Track.select_all())
+
+
 # Add a new track HTML
 @app.route('/new')
 def new_track():
