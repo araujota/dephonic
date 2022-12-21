@@ -26,7 +26,7 @@ def add_track():
     if request.method == 'POST':
         if request.files:
             track = request.files['audio_file']
-            track.save(os.path.join(app.config['UPLOAD_DIR'], track.filename))
+            track.save(os.path.join(app.config['UPLOAD_FOLDER'], track.filename))
             return "File uploaded successfully."
     data = {
         'title': request.form['title'],
