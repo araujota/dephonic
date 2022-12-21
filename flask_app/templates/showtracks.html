@@ -15,26 +15,23 @@
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
     
     <!-- What will appear in the tab -->
-    <title>DePhonic</title>
+    <title>Home</title>
 </head>
 
 <body>
     <div class="bg">
     <!-- Navbar -->
         <div class="navbar">
-            <h1 class="page-header">Dephonic</h1>
+            <h1 class="page-header">Your Tracks</h1>
             
         </div>
         <!-- Navbar -->
-        <div class="content">
-            <p>With Dephonic, <span>ALL</span> the world's a stage</p>
-            <p>Put your <span id="media"></span><br>wherever you want</p>
-            <p><a id="logregbutton" href="/logreg">Login / Register</a>to get started</p>
-        </div>
-        <div class="footer">
-            <p>About Us</p>
-            <p>Contact</p>
-            <p>FAQ</p>
+        <div class="tracks-container">
+            <div class="small-track">
+                <div class="small-code"></div>
+                <p class="small-title">"test"</p>
+                <a href="/show">View</a>
+            </div>
         </div>
     </div>
     <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>

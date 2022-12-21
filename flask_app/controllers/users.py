@@ -16,7 +16,15 @@ def user_tracks():
     }
     user = User.user_by_id(user_data)
     tracks = Track.select_all()
-    return render_template('', user = user, tracks = tracks)
+    return render_template('showtracks.html', user = user, tracks = tracks)
+
+@app.route('/logreg')
+def logreg():
+    return render_template("login_reg.html")
+
+@app.route('/testtracks')
+def test():
+    return render_template("showtracks.html")
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -26,14 +34,14 @@ def login():
     if user:
         if not bcrypt.check_password_hash(user.password, request.form["password"]):
             flash("Email/Password combination is incorrect")
-            return redirect('/')
+            return redirect('/logreg')
 
         session['user_id'] = user.id
         flash("Success! Welcome!")
         return redirect('/tracks')
 
     flash("No email for this account.")
-    return redirect("/")
+    return redirect("/logreg")
 
 @app.route('/register', methods=["POST"])
 def reg():
