@@ -1,10 +1,6 @@
-from flask import Flask
+from flask_app.controllers import users, tracks
 
-app=Flask(__name__)
-
-@app.route('/')
-def index():
-    return "Let's do this!"
+from flask_app import app
 
 if __name__=="__main__":
     app.run(debug=True)

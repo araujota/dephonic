@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Description of the webpage in search engines -->
+    <meta name="Dephonic" content="Upload audio files and generate QR codes to share with others">
+    <!-- Author(s) for the page -->
+    <meta name="author" content="Alexis Romero">
+    <!-- Page will refresh every 30 seconds -->
+    <meta http-equiv="refresh" content="30">
+    <!-- Links for external style sheets -->
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+    
+    <!-- What will appear in the tab -->
+    <title>Home</title>
+</head>
+
+<body>
+    <div class="bg">
+    <!-- Navbar -->
+        <div class="navbar">
+            <h1 class="page-header">Your Tracks</h1>
+            
+        </div>
+        <!-- Navbar -->
+        <div class="tracks-container">
+            <div class="small-track">
+                <div class="small-code"></div>
+                <p class="small-title">"test"</p>
+                <a href="/show">View</a>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+
+</html>
