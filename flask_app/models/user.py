@@ -6,7 +6,7 @@ import re
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0_9.+_-]+@[a-zA-Z0_9.+_-]+\.[a-zA-z]+$')
 
 class User:
-    db = ""
+    db = "dephonics_schema"
 
     def __init__(self,data):
         self.id = data['id']
@@ -106,6 +106,15 @@ class User:
             flash ('Password must be at least 8 characters.')
             is_valid = False
         return is_valid
+    
+    @classmethod
+    def show(cls, data):
+        query="""
+        SELECT * FROM tracks LEFT JOIN users ON tracks.user_id = users.id WHERE tracks.id = %(id)s;
+        """
+        results = connectToMySQL('dephonics_schema').query_db(query, data)
+        print(results)
+        return results
 
     #if needed. replace *whatever* with whatever is needed. Many to Many relationship
     # @classmethod
