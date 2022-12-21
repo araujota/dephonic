@@ -18,7 +18,7 @@ def editUser(id):
         flash("Incorrect User")
         return redirect("") # ToDo: redirect to desired location
     #can use user to prefil form
-    return render_template("", user = user)# ToDo: redirect to desired location
+    return render_template("", user = user)# ToDo: render_template
 
 @app.route('/updateAcc', methods=["POST"])
 def updateUser():
