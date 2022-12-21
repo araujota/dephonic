@@ -9,27 +9,26 @@ bcrypt = Bcrypt(app)
 def index():
     return render_template("homepage.html")
 
-@app.route('/loginOrReg')
-def login_reg():
-    return render_template("login_reg.html")
+@app.route('/editUser/<int:id>')
+def editUser(id):
+    user=User.user_by_id({"id":id})
+    if not session['user_id']:
+        return redirect("/login")
+    if not session['user_id'] == id:
+        flash("Incorrect User")
+        return redirect("") # ToDo: redirect to desired location
+    #can use user to prefil form
+    return render_template("", user = user)# ToDo: redirect to desired location
 
-#working on update stuff here
-#@app.route('/editAcc')
-#def editAcc(id):
+@app.route('/updateAcc', methods=["POST"])
+def updateUser():
+    # user=User.user_by_email(request.form)
+    #use hidden input for id
+    if not User.val_update(request.form):
+        return redirect(f'/editUser/{request.form["id"]}')
+    User.update_user(request.form)
+    return redirect("")# ToDo: redirect to desired location
     
-#@app.route('/updateAcc', methods=["POST"])
-#def updateAcc(id):
-    
-
-@app.route('/tracks')
-def user_tracks():
-    user_data = {
-        'id' : session['user_id']
-    }
-    user = User.user_by_id(user_data)
-    tracks = Track.select_all()
-    return render_template('showtracks.html', user = user, tracks = tracks)
-
 @app.route('/logreg')
 def logreg():
     return render_template("login_reg.html")
