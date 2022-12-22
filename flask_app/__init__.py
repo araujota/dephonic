@@ -4,6 +4,7 @@ load_dotenv()
 
 from flask import Flask
 
+my_id = os.getenv("ID")
 FLASK_SECRET=os.getenv('FLASK_SECRET_KEY')
 
 app = Flask(__name__)

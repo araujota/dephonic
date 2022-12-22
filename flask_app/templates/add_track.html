@@ -28,7 +28,7 @@
         <!-- Navbar -->
         <!-- Add track -->
         <div class="form_add_track">
-            <form action="/add" method="post" class="">
+            <form action="/add" method="post" class="form" enctype="multipart/form-data">
                 <!-- Add audio file -->
                 <div class="audio_file">
                     <label for="file">File:</label>
@@ -44,10 +44,11 @@
                     {% endif %}
                     {% endwith %}
                     <label for="title"></label>
+                    <input type="hidden" name="user_id" value="{{session['user_id']}}">
                     <input type="text" name="title" placeholder="Add Title" class="form_control">
                 </div>
                 <!-- Submit form -->
-                <input type="submit" value="Add" class="form_submit">
+                <input type="submit" value="Add"  class="form_submit">
             </form>
         </div>
     </div>

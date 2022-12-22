@@ -27,7 +27,7 @@
     <!-- Navbar -->
     <!-- Edit track -->
     <div class="form_edit_track">
-        <form action="" method="post" class="">
+        <form action="" method="post" class="form" enctype="multipart/form-data">
             <!-- Edit audio file -->
             <div class="audio_file">
 
@@ -43,6 +43,7 @@
                 {% endwith %}
                 <label for="track_title"></label>
                 <input type="text" name="track_title" value="" class="form_control">
+                <input type="hidden" name="id" value="{{track.id}}">
             </div>
             <!-- Submit form -->
             <input type="submit" value="Save" class="form_submit">
