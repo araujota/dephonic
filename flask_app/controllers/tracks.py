@@ -26,8 +26,9 @@ def add_track():
     if request.method == 'POST':
         if request.files:
             track = request.files['audio_file']
+            filename = secure_filename(track.filename)
             track.save(os.path.join(app.config['UPLOAD_FOLDER'], track.filename))
-            return "File uploaded successfully."
+
     data = {
         'title': request.form['title'],
         'audio_file': request.files['audio_file'],
@@ -61,10 +62,9 @@ def edit_track():
 def update():
     if request.method == 'POST':
         if request.files:
-            uploaded_file = request.files['audio_file']
-            filename = secure_filename(uploaded_file.filename)
-            uploaded_file.save(os.path.join(app.config['UPLOAD_FOLDER'], uploaded_file.filename))
-            session['uploaded_img_file_path'] = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            track = request.files['audio_file']
+            filename = secure_filename(track.filename)
+            track.save(os.path.join(app.config['UPLOAD_FOLDER'], track.filename))
     data = {
         'id':request.form['id'],
         'title': request.form['title'],
