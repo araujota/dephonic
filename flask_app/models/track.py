@@ -8,7 +8,6 @@ class Track:
         self.id = data['id']
         self.title = data['title']
         self.audio_file = data['audio_file']
-        self.qr_code = data['qr_code']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.user_id = data['user_id']
@@ -17,8 +16,8 @@ class Track:
     
     @classmethod
     def add_track(cls, data):
-        query = """INSERT INTO tracks (title, audio_file, qr_code, user_id)
-        VALUES (%(title)s, %(audio_file)s, %(qr_code)s, %(user_id)s);"""
+        query = """INSERT INTO tracks (title, audio_file, user_id)
+        VALUES (%(title)s, %(audio_file)s, %(user_id)s);"""
         result = connectToMySQL(cls.db).query_db(query,data)
         return result
 
@@ -35,8 +34,7 @@ class Track:
     
     @classmethod
     def update_track(cls,data):
-        query = """UPDATE tracks SET title=%(title)s, audio_file=%(audio_file)s,
-        qr_code=%(qr_code)s
+        query = """UPDATE tracks SET title=%(title)s, audio_file=%(audio_file)s
         WHERE id = %(id)s;"""
         result = connectToMySQL('dephonics_schema').query_db(query, data)
         return result
