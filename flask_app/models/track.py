@@ -52,6 +52,16 @@ class Track:
             all_tracks.append(cls(one_track))
         return all_tracks
 
+    @classmethod
+    def select_all_by_user(cls, data):
+        query = """SELECT * FROM tracks WHERE user_id = %(id)s;
+        """
+        results = connectToMySQL('dephonics_schema').query_db(query)
+        all_tracks = []
+        for one_track in results:
+            all_tracks.append(cls(one_track))
+        return all_tracks
+
 
     @classmethod
     def destroy(cls,data):

@@ -13,6 +13,6 @@ app.secret_key = FLASK_SECRET
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
-UPLOAD_FOLDER = "flask_app/static/files"
+UPLOAD_FOLDER = "flask_app/static/audio"
 ALLOWED_EXTENSIONS = {'mp3', 'mp4', 'aac', 'flac', 'jpeg'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
