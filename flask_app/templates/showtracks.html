@@ -27,14 +27,14 @@
         </div>
         <!-- Navbar -->
         <div class="tracks-container">
+            {% for track in all_tracks %}    
             <div class="small-track">
-
-                {% for track in all_tracks %}
                     <img src="https://api.qrserver.com/v1/create-qr-code/?data=127.0.0.1:5000/play/{{track.id}} &amp;size=100x100" />
                     <p class="small-title">{{track.title}}</p>
                     <a href="/show/{{track.id}}">View</a>
                 {% endfor %}
             </div>
+            {% endfor %}
         </div>
     </div>
     <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
