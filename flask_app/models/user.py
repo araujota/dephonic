@@ -1,5 +1,5 @@
 from flask_app.config.mysqlconnection import connectToMySQL
-from flask import flash
+from flask import flash, session
 from flask_app.models import track
 import re
 
@@ -50,22 +50,22 @@ class User:
         is_valid = True
         user_db = User.user_by_email(user)
         if user_db:
-            flash('Email already used.')
+            flash('Email already used.', "email")
             is_valid = False
         if len(user['first_name']) <2:
-            flash ('First name must be at least 2 characters.')
+            flash ('First name must be at least 2 characters.',"first_name")
             is_valid = False
         if len(user['last_name']) <2:
-            flash ('Last name must be at least 2 characters.')
+            flash ('Last name must be at least 2 characters.', "last_name")
             is_valid = False
         if len(user['password']) <8:
-            flash ('Password must be at least 8 characters.')
+            flash ('Password must be at least 8 characters.', "password")
             is_valid = False
         if user['password'] != user['confirm_password']:
-            flash('Your passwords must match.')
+            flash('Your passwords must match.',"confirm_password")
             is_valid = False
         if not EMAIL_REGEX.match(user['email']):
-            flash('Invalid email.')
+            flash('Invalid email.', "email")
             is_valid = False
         return is_valid
 
@@ -77,23 +77,22 @@ class User:
         user_db = User.user_by_email(user)
         #if the_user_filtered_by_id.email != user['email']:
         #    print("Not same email.")
-        if user_db:
+        if user_db and session["user_id"] != user_db.id:
             print("Email exists in database")
-            flash("Can not change email.")
+            flash("Email is already taken.","email")
             is_valid = False
         if len(user['first_name']) <3:
-            flash ('First name must be at least 3 characters.')
+            flash ('First name must be at least 3 characters.', "first_name")
             is_valid = False
         if len(user['last_name']) <3:
-            flash ('Last name must be at least 3 characters.')
+            flash ('Last name must be at least 3 characters.', "last_name")
             is_valid = False
         if len(user['password']) <8:
-            flash ('Password must be at least 8 characters.')
+            flash ('Password must be at least 8 characters.', "password")
             is_valid = False
         if not EMAIL_REGEX.match(user['email']):
-            flash('Invalid email.')
+            flash('Invalid email.', "email")
             is_valid = False
-
         return is_valid
 
     @staticmethod

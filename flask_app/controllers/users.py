@@ -13,12 +13,11 @@ def index():
 def editUser(id):
     user=User.user_by_id({"id":id})
     if not session['user_id']:
-        return redirect("/login")
+        return redirect("/logreg")
     if not session['user_id'] == id:
         flash("Incorrect User")
-        return redirect("") # ToDo: redirect to desired location
-    #can use user to prefil form
-    return render_template("", user = user)# ToDo: render_template
+        return redirect("/tracks")
+    return render_template("update_user.html", user = user)
 
 @app.route('/updateAcc', methods=["POST"])
 def updateUser():
@@ -26,8 +25,15 @@ def updateUser():
     #use hidden input for id
     if not User.val_update(request.form):
         return redirect(f'/editUser/{request.form["id"]}')
-    User.update_user(request.form)
-    return redirect("")# ToDo: redirect to desired location
+    pw_hash = bcrypt.generate_password_hash(request.form['password'])
+    reg_data = {
+        'first_name': request.form['first_name'],
+        'last_name' : request.form['last_name'],
+        'email' : request.form['email'],
+        'password' : pw_hash
+    }
+    User.update_user(reg_data)
+    return redirect("/tracks")
     
 @app.route('/logreg')
 def logreg():
@@ -57,7 +63,7 @@ def login():
 @app.route('/register', methods=["POST"])
 def reg():
     if not User.val_register(request.form):
-        return redirect('/')
+        return redirect('/logreg')
 
     pw_hash = bcrypt.generate_password_hash(request.form['password'])
     reg_data = {

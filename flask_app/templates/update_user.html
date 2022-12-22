@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Description of the webpage in search engines -->
-    <meta name="description" content="Login and Registration">
+    <meta name="description" content="Updating the user.">
     <!-- Author(s) for the page -->
-    <meta name="author" content="Alexis Romero">
+    <meta name="author" content="Joseph Breland">
     <!-- Page will refresh every 30 seconds -->
     <meta http-equiv="refresh" content="30">
     <!-- Bootstrap links -->
@@ -19,49 +18,19 @@
     <script src="{{url_for('static', filename='/js/app.js')}}" async></script>
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
     <!-- What will appear in the tab -->
-    <title>Login / Register</title>
+    <title>Edit User</title>
 </head>
-
 <body>
     <div class="bg">
     <!-- Page header -->
         <div class="navbar">
-            <h1 class="page-header">Login or Register</h1>
+            <h1 class="page-header">Edit Account</h1>
         </div>
         <div class="formcontainer">
-        <!-- Login form -->
-            <div class="form_login">
-                <form class="logregforms" action="/login" method="post">
-                    <h2>Login</h2>
-                    <div class="form_group">
-                        {% with messages = get_flashed_messages(category_filter=["invalid_email"]) %}
-                        {% if messages %}
-                        {% for message in messages %}
-                        <p>{{message}}</p>
-                        {% endfor %}
-                        {% endif %}
-                        {% endwith %}
-                        <label for="email">Email:</label>
-                        <input type="text" name="email" class="form_control">
-                    </div>
-                    <div class="form_group">
-                        {% with messages = get_flashed_messages(category_filter=["invalid_pw"]) %}
-                        {% if messages %}
-                        {% for message in messages %}
-                        <p>{{message}}</p>
-                        {% endfor %}
-                        {% endif %}
-                        {% endwith %}
-                        <label for="password">Password:</label>
-                        <input type="password" name="password" class="form_control">
-                    </div>
-                    <input type="submit" value="Login" class="form_submit">
-                </form>
-                <!-- Login form -->
-            </div>
             <!-- Registration form -->
             <div class="form_register">
-                <form class="logregforms" action="/register" method="post">
+                <form class="logregforms" action="/updateAcc" method="post">
+                    <input type="hidden" value="{{user.id}}" name="id">
                     <h2>Register</h2>
                     <!-- First name input -->
                     <div class="form_group">
@@ -73,7 +42,7 @@
                         {% endif %}
                         {% endwith %}
                         <label for="first_name">First Name:</label>
-                        <input type="text" name="first_name" class="form_control">
+                        <input type="text" name="first_name" class="form_control" value="{{user.first_name}}">
                     </div>
                     <!-- Last name input -->
                     <div class="form_group">
@@ -85,7 +54,7 @@
                         {% endif %}
                         {% endwith %}
                         <label for="last_name">Last Name:</label>
-                        <input type="text" name="last_name" class="form_control">
+                        <input type="text" name="last_name" class="form_control" value="{{user.last_name}}">
                     </div>
                     <!-- Email input -->
                     <div class="form_group">
@@ -97,7 +66,7 @@
                         {% endif %}
                         {% endwith %}
                         <label for="email">Email:</label>
-                        <input type="text" name="email" class="form_control">
+                        <input type="text" name="email" class="form_control" value="{{user.email}}">
                     </div>
                     <!-- Password input -->
                     <div class="form_group">
@@ -123,7 +92,7 @@
                         <label for="repeat_password">Confirm Password:</label>
                         <input type="password" name="confirm_password" class="form_control">
                     </div>
-                    <input type="submit" value="Register" class="form_submit">
+                    <input type="submit" value="Save" class="form_submit">
                 </form>
                 <!-- Registration form -->
             </div>
