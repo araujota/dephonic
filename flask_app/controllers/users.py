@@ -16,7 +16,7 @@ def editUser(id):
         return redirect("/logreg")
     if not session['user_id'] == id:
         flash("Incorrect User")
-        return redirect("/tracks")
+        return redirect("/showtracks")
     return render_template("update_user.html", user = user)
 
 @app.route('/updateAcc', methods=["POST"])
@@ -33,7 +33,7 @@ def updateUser():
         'password' : pw_hash
     }
     User.update_user(reg_data)
-    return redirect("/tracks")
+    return redirect("/showtracks")
     
 @app.route('/logreg')
 def logreg():
@@ -55,7 +55,7 @@ def login():
 
         session['user_id'] = user.id
         flash("Success! Welcome!")
-        return redirect('/tracks')
+        return redirect('/showtracks')
 
     flash("No email for this account.")
     return redirect("/logreg")
@@ -76,7 +76,7 @@ def reg():
     user_id = User.reg_user(reg_data)
     session["user_id"] = user_id
     flash("Registration was successful")
-    return redirect("/tracks")
+    return redirect("/showtracks")
 
 @app.route('/logout')
 def logout():
