@@ -31,11 +31,10 @@ def add_track():
     data = {
         'title': request.form['title'],
         'audio_file': request.files['audio_file'],
-        'qr_code': request.files['qr_code'],
         'user_id': session['user_id']
     }
     Track.add_track(data)
-    return redirect('/tracks')
+    return redirect('/showtracks')
 
 
 # Show One Track
@@ -73,7 +72,7 @@ def update():
         'user_id': session['user_id']
     }
     Track.update_track(data)
-    return redirect('/')
+    return redirect('/showtracks')
 
 
 # Delete a Track
@@ -83,4 +82,4 @@ def delete(id):
         "id":id
     }
     Track.destroy(data)
-    return redirect('/')
+    return redirect('/showtracks')
