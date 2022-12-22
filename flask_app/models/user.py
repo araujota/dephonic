@@ -118,7 +118,7 @@ class User:
     @classmethod
     def show(cls, data):
         query="""
-        SELECT * FROM tracks LEFT JOIN users ON tracks.user_id = users.id WHERE tracks.id = %(id)s;
+        SELECT * FROM tracks LEFT JOIN users ON tracks.users_id = users.id WHERE tracks.id = %(id)s;
         """
         results = connectToMySQL('dephonics_schema').query_db(query, data)
         print(results)

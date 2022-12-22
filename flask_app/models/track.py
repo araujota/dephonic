@@ -10,14 +10,14 @@ class Track:
         self.audio_file = data['audio_file']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
-        self.user_id = data['user_id']
+        self.users_id = data['users_id']
         self.user = None
         
     
     @classmethod
     def add_track(cls, data):
-        query = """INSERT INTO tracks (title, audio_file, user_id)
-        VALUES (%(title)s, %(audio_file)s, %(user_id)s);"""
+        query = """INSERT INTO tracks (title, audio_file, users_id)
+        VALUES (%(title)s, %(audio_file)s, %(users_id)s);"""
         result = connectToMySQL(cls.db).query_db(query,data)
         return result
 

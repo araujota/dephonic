@@ -5,49 +5,48 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="{{url_for('static',filename='app.css')}}" />
     <title>DePhonic | Edit a Track</title>
 </head>
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar">
-        <!-- Container Wrapper -->
-        <div class="container">
-            <!-- Company logo -->
-            <a class="navbar_logo" href="">
-                <img src="" />
-            </a>
-            <!-- Page tile -->
-            <span>Edit Track</span>
-            <!-- Logout button -->
-            <button type="button" class="navbar_logout">Logout</button>
+    <div class="bg">
+        <div class="navbar">
+            <!-- Container Wrapper -->
+            <div class="container">
+                <!-- Page tile -->
+                <h1 class="page-header">Edit Track</h1>
+            </div>
+            <!-- Container wrapper -->
         </div>
-        <!-- Container wrapper -->
-    </nav>
-    <!-- Navbar -->
-    <!-- Edit track -->
-    <div class="form_edit_track">
-        <form action="" method="post" class="">
-            <!-- Edit audio file -->
-            <div class="audio_file">
-
-            </div>
-            <!-- Edit audio title -->
-            <div class="title">
-                {% with messages = get_flashed_messages(category_filter=["track_title"]) %}
-                {% if messages %}
-                {% for message in messages %}
-                <p>{{message}}</p>
-                {% endfor %}
-                {% endif %}
-                {% endwith %}
-                <label for="track_title"></label>
-                <input type="text" name="track_title" value="" class="form_control">
-            </div>
-            <!-- Submit form -->
-            <input type="submit" value="Save" class="form_submit">
-            <input type="submit" value="Delete" class="form_submit">
-        </form>
+        <!-- Navbar -->
+        <!-- Edit track -->
+        <div class="form_edit_track">
+            <form action="/track/edit/update" method="post" class="">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?data=127.0.0.1:5000/play/{{track.id}} &amp;size=200x200" />
+                <!-- Edit audio file -->
+                <input type="hidden" value="{{track.id}}" name="id"/>
+                <input type="hidden" value="{{track.audio_file}}" name="audio_file"/>
+                <!-- Edit audio title -->
+                <div class="title">
+                    {% with messages = get_flashed_messages(category_filter=["track_title"]) %}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <p>{{message}}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <p>Audio File: {{track_filename}}</p>
+                    <label for="track_title">Title: </label>
+                    <input type="text" name="title" value="{{track.title}}" class="form_control">
+                </div>
+                <!-- Submit form -->
+                <input type="submit" value="Save" class="form_submit">
+                <p>or</p>
+                <a class="form_submit" href="/destroy/{{track.id}}">Delete</a>
+            </form>
+        </div>
     </div>
     <!-- Edit track -->
 </body>

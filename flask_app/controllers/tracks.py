@@ -12,7 +12,7 @@ def all():
         return redirect('/logout')
     user = User.user_by_id({"id":session["user_id"]})
     print(session['user_id'])
-    return render_template("showtracks.html", user=user, all_tracks = Track.select_all_by_user({"id":session["user_id"]}))
+    return render_template("showtracks.html", user=user, all_tracks = Track.select_all())
 
 
 # Add a new track HTML
@@ -32,10 +32,20 @@ def add_track():
     data = {
         'title': request.form['title'],
         'audio_file': request.files['audio_file'],
-        'user_id': session['user_id']
+        'users_id': session['user_id']
     }
     Track.add_track(data)
     return redirect('/showtracks')
+
+@app.route('/play/<int:id>')
+def playtrack(id):
+    data = {
+        "id":id,
+        }
+    track = Track.get_one_track(data)
+    track_file = track.audio_file.split("'")
+    track_filename = track_file[1]
+    return render_template("view_track.html", track=track, track_filename=track_filename)
 
 
 # Show One Track
@@ -45,7 +55,9 @@ def show_one_track(id):
         "id":id,
         }
     track = Track.get_one_track(data)
-    return render_template("view_track.html", track=track, user=User.show(data))
+    track_file = track.audio_file.split()
+    track_filename = track_file[1]
+    return render_template("edit_track.html", track=track, user=User.show(data), track_filename=track_filename)
 
 # Edit a Track
 @app.route('/track/edit')
@@ -60,16 +72,11 @@ def edit_track():
 # Edit a Track POST
 @app.route('/track/edit/update', methods=["POST"])
 def update():
-    if request.method == 'POST':
-        if request.files:
-            track = request.files['audio_file']
-            filename = secure_filename(track.filename)
-            track.save(os.path.join(app.config['UPLOAD_FOLDER'], track.filename))
     data = {
         'id':request.form['id'],
         'title': request.form['title'],
-        'audio_file': request.files['audio_file'],
-        'user_id': session['user_id']
+        'audio_file': request.form['audio_file'],
+        'users_id': session['user_id']
     }
     Track.update_track(data)
     return redirect('/showtracks')

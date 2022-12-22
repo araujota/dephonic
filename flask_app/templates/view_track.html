@@ -5,47 +5,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DePhonic | View a Track</title>
+    <!-- Description of the webpage in search engines -->
+    <meta name="Dephonic" content="Upload audio files and generate QR codes to share with others">
+    <!-- Author(s) for the page -->
+    <meta name="author" content="Alexis Romero">
+    <!-- Page will refresh every 30 seconds -->
+    <meta http-equiv="refresh" content="30">
+    <!-- Links for external style sheets -->
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+    <title>Playing {{track.title}}</title>
 </head>
 
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <!-- Container Wrapper -->
-        <div class="container">
-            <!-- Company logo -->
-            <a class="navbar_logo" href="">
-                <img src="" />
-            </a>
-            <!-- Page tile -->
-            <span>View Track</span>
-            <!-- Logout button -->
-            <button type="button" class="navbar_logout">Logout</button>
+    <div class="bg">
+        <div class="big-title-holder">
+            <h1 class="big-title">"{{track.title}}"</h1>
         </div>
-        <!-- Container wrapper -->
-    </nav>
-    <!-- Navbar -->
-    <!-- View track -->
-    <div class="view_track">
-        <!-- Audio image -->
-        <div class="audio_file">
-            <img src="" alt="Track image">
-        </div>
-        <!-- Audio title -->
-        <div class="title">
-            <p></p>
+        <div class="view_track">
+            <!-- Audio image -->
+            <audio controls autoplay>
+                <source src="{{ url_for('static', filename=track_filename) }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <!-- Audio title -->
+            
         </div>
     </div>
     <!-- View track -->
 </body>
-
-<!-- Footer -->
-<footer>
-    <ul>
-        <li>About Us</li>
-        <li>Contact Us</li>
-        <li>Q & A</li>
-    </ul>
-</footer>
 
 </html>

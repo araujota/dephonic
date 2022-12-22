@@ -102,9 +102,23 @@ span {
 }
 
 .form_add_track {
-    position: fixed;
-    top: 50%;
-    right: 50%;
+    display: flex;
+    margin: auto;
+    margin-top: 100px;
+    justify-content: center;
+    text-align: center;
+}
+
+.form_add_track * {
+    margin-top: 25px;
+    font-size: 1.25em;
+}
+
+.form_add_track input {
+    border-radius: 25px;
+    border: none;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .logregforms input {
@@ -124,6 +138,7 @@ span {
     color: white;
     font-weight: bold;
     border: rgba(0,0,0,0);
+    text-decoration: none;
 
 }
 
@@ -133,8 +148,8 @@ span {
 }
 
 .small-code {
-    width: 75px;
-    height: 75px;
+    width: 150px;
+    height: 150px;
     background-color: black;
     margin: 15px;
 }
@@ -147,6 +162,7 @@ span {
     margin: 10px;
     display: flexbox;
     text-align: center;
+    padding-bottom: 10px;
 }
 
 .small-title {
@@ -157,4 +173,63 @@ span {
 
 .small-track a {
     margin-bottom: 10px;
+}
+
+.empty-tracks {
+    display: flexbox;
+    justify-content: center;
+    margin: auto;
+    text-align: center;
+}
+
+.empty-tracks * {
+    margin: 25px;
+}
+
+.add-track {
+    align-self: center;
+    margin: 50px;
+    font-size: 2em;
+}
+
+.form_edit_track {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    text-align: center;
+    margin: 25px;
+}
+
+.form_edit_track * {
+    margin: 15px;
+    font-size: 1.25em;
+    border-radius: 25px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: none;
+}
+
+.form_edit_track img {
+    border-radius: 0px;
+}
+
+.big-title {
+    font-size: 10em;
+    font-style: italic;
+    margin-top: 300px;
+    letter-spacing: 5px;
+}
+
+.big-title-holder {
+    display: flex;
+    justify-content: center;
+    vertical-align: auto;
+    margin: auto;
+}
+
+audio {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
 }

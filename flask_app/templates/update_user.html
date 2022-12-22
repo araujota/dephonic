@@ -18,7 +18,7 @@
     <script src="{{url_for('static', filename='/js/app.js')}}" async></script>
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
     <!-- What will appear in the tab -->
-    <title>Edit User</title>
+    <title>Dephonic</title>
 </head>
 <body>
     <div class="bg">
@@ -31,7 +31,7 @@
             <div class="form_register">
                 <form class="logregforms" action="/updateAcc" method="post">
                     <input type="hidden" value="{{user.id}}" name="id">
-                    <h2>Register</h2>
+                    <h2>Profile Information</h2>
                     <!-- First name input -->
                     <div class="form_group">
                         {% with messages = get_flashed_messages(category_filter=["first_name"]) %}

@@ -27,14 +27,38 @@
         </div>
         <!-- Navbar -->
         <div class="tracks-container">
-            {% for track in all_tracks %}    
-            <div class="small-track">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?data=127.0.0.1:5000/play/{{track.id}} &amp;size=100x100" />
-                    <p class="small-title">{{track.title}}</p>
-                    <a href="/show/{{track.id}}">View</a>
-            </div>
-            {% endfor %}
+            {% if all_tracks %}
+                {% for track in all_tracks %}    
+                <div class="small-track">
+                        <img class="small-code" src="https://api.qrserver.com/v1/create-qr-code/?data=127.0.0.1:5000/play/{{track.id}} &amp;size=100x100" />
+                        <p class="small-title">"{{track.title}}"</p>
+                        <a href="/show/{{track.id}}">Show</a>
+                </div>
+                {% endfor %}
+                <div class="add-track">
+                    <a class="form_submit" href="/new">Add Track</a>
+                    <br>
+                    <br>
+                    <a class="form_submit" href="/logout">Log Out of {{user.first_name}} {{user.last_name}}</a>
+                    <br>
+                    <br>
+                    <a class="form_submit" href="/editUser/{{session['user_id']}}">Edit Profile for {{user.first_name}} {{user.last_name}}</a>
+                </div>
+                
+            {% else %}
+                <div class="empty-tracks">
+                    <h1>No tracks</h1>
+                    <a class="form_submit" href="/new">Add Track</a>
+                    <br>
+                    <br>
+                    <a class="form_submit" href="/logout">Log Out of {{user.first_name}} {{user.last_name}}</a>
+                    <br>
+                    <br>
+                    <a class="form_submit" href="/editUser/{{session['user_id']}}">Edit Profile for {{user.first_name}} {{user.last_name}}</a>
+                </div>
+            {% endif %}
         </div>
+        
     </div>
     <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
